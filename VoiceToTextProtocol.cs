@@ -36,9 +36,9 @@ public class VoiceToTextProtocol//<-- Class that handles the voice to text proto
                     PlayerInput = PlayerResponse?.text;
                 }
             };
-            Console.WriteLine("Speak now please"); //<-- Prompt the user to speak
+            Console.WriteLine("[Speak your incantation]"); //<-- Prompt the user to speak
             waveIn.StartRecording(); //<-- starts recording audio from the mic
-            Console.WriteLine("Press any button to confirm your input");
+            Console.WriteLine("[Press any button to confirm your incantation]");
             Console.ReadKey(); //<-- waits for a key press to listen again
             waveIn.StopRecording();//<-- stops recording audio
         }

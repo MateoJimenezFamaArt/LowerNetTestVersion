@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Deliverable1TestOnLowerNet")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+91145bf0bc2a64a2befc7aeca7a92ffbf114159c")]
 [assembly: System.Reflection.AssemblyProductAttribute("Deliverable1TestOnLowerNet")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Deliverable1TestOnLowerNet")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
