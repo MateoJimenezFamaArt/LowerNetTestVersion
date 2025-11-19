@@ -11,9 +11,9 @@
         
 # CONDITIONS
          - [x] Read and write to the console
-         - [] Declare variables of various types (int, float, bool) and manipulate their values
-         - [] Use 'if' and 'else' statements to conditionally execute code
-         - [] Create an array and fill it with values
-         - [] Use the addition (+), subtraction (-), division(/), and multiplication (*) operators
+         - [x] Declare variables of various types (int, float, bool) and manipulate their values
+         - [x] Use 'if' and 'else' statements to conditionally execute code
+         - [x] Create an array and fill it with values
+         - [x] Use the addition (+), subtraction (-), division(/), and multiplication (*) operators
          
 
