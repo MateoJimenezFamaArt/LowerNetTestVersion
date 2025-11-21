@@ -17,8 +17,8 @@ public class VoiceToTextProtocol//<-- Class that handles the voice to text proto
 
     public string ReadPlayersInput() //<-- Method to read a single players input and register it as text
     {
-        string PlayerInput = "";
-        string ConfirmationStatement = "Enter"; //Make it so once you say enter the Input is confirmed
+        string playerInput = "";
+        string confirmationStatement = "Enter"; //Make it so once you say enter the Input is confirmed
 
         using (var waveIn = new WaveInEvent()) //<-- Using NAudio event system to capture audio from microphone
         {
@@ -31,9 +31,9 @@ public class VoiceToTextProtocol//<-- Class that handles the voice to text proto
                 if (recognizer.AcceptWaveform(e.Buffer, e.BytesRecorded)) // <-- Process the data to see if its understandable as speech
                 {
                     string json = recognizer.Result(); // <-- Get the result in JSON format
-                    var PlayerResponse = JsonSerializer.Deserialize<VoskResult>(json); // <-- Deserialize the JSON to get the text
-                    Console.WriteLine("Did you say?: " + PlayerResponse?.text); // <-- Print the recognized text to the console
-                    PlayerInput = PlayerResponse?.text;
+                    var playerResponse = JsonSerializer.Deserialize<VoskResult>(json); // <-- Deserialize the JSON to get the text
+                    Console.WriteLine("Did you say?: " + playerResponse?.text); // <-- Print the recognized text to the console
+                    playerInput = playerResponse?.text;
                 }
             };
             Console.WriteLine("[Speak your incantation]"); //<-- Prompt the user to speak
@@ -43,7 +43,7 @@ public class VoiceToTextProtocol//<-- Class that handles the voice to text proto
             waveIn.StopRecording();//<-- stops recording audio
         }
 
-        return PlayerInput; //<-- returns the players input as text to be used in the main program
+        return playerInput; //<-- returns the players input as text to be used in the main program
 
     }
 

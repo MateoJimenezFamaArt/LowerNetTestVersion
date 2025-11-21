@@ -488,9 +488,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gd81mateo\\Desktop\\VFS_LOCAL\\Term 1\\Programing\\Deliverable1TestOnLowerNet\\Deliverable1TestOnLowerNet.csproj",
-      "projectName": "Deliverable1TestOnLowerNet",
-      "projectPath": "C:\\Users\\gd81mateo\\Desktop\\VFS_LOCAL\\Term 1\\Programing\\Deliverable1TestOnLowerNet\\Deliverable1TestOnLowerNet.csproj",
+      "projectUniqueName": "C:\\Users\\gd81mateo\\Desktop\\VFS_LOCAL\\Term 1\\Programing\\Deliverable1TestOnLowerNet\\GD81_MateoJimenezFama_assignment1.csproj",
+      "projectName": "GD81_MateoJimenezFama_assignment1",
+      "projectPath": "C:\\Users\\gd81mateo\\Desktop\\VFS_LOCAL\\Term 1\\Programing\\Deliverable1TestOnLowerNet\\GD81_MateoJimenezFama_assignment1.csproj",
       "packagesPath": "C:\\Users\\gd81mateo\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\gd81mateo\\Desktop\\VFS_LOCAL\\Term 1\\Programing\\Deliverable1TestOnLowerNet\\obj\\",
       "projectStyle": "PackageReference",

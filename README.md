@@ -17,3 +17,12 @@
          - [x] Use the addition (+), subtraction (-), division(/), and multiplication (*) operators
          
 
+# Instructions
+    In order to run the program and have the full experience please do the following steps in order to compile the project:
+    1. Download the full zip file of the project
+    2. Hit right click on VoskLite folder and click on Copy as path
+    3. Head over to the Program.cs file and open it
+    4. Navigate to Line 36
+    5. On that line modify the string that is inside of the function voice.VoiceToTextProtocolCreator("");
+    6. Paste your path there and make sure it looks something like this: "C:\\Users\\gd81mateo\\Desktop\\VFS_LOCAL\\Term 1\\Programing\\Deliverable1TestOnLowerNet\\VoskLite"
+    7. Hit compile and this should work nicely

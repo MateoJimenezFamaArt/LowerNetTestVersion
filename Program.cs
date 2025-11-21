@@ -14,13 +14,13 @@ public class Program
         If they hit their enemy with a spell more potent they can deal extra damage
     */
 
-    static string[] SpellNature = new string[3] { "Neutral", "Light" , "Darkness"}; //Array with Natures
-    static string[] SpellAdjective = new string[3] {"Spark" , "Ray" , "Cone"}; // Array with Adjectives
-    static string[] SpellCasted = new string[3] { "Spark of Neutrality", "Ray of Light", "Cone of Darkness" }; // Array with Spell Casts
+    static string[] spellNature = new string[3] { "Neutral", "Light" , "Darkness"}; //Array with Natures
+    static string[] spellAdjective = new string[3] {"Spark" , "Ray" , "Cone"}; // Array with Adjectives
+    static string[] spellCasted = new string[3] { "Spark of Neutrality", "Ray of Light", "Cone of Darkness" }; // Array with Spell Casts
 
-    static int PlayerHealth = 100; // Players health value
-    static int GarysHealth = 100; // Garys health
-    static int MagicalDamage = 10; // Base magic dmg
+    static int playerHealth = 100; // Players health value
+    static int garysHealth = 100; // Garys health
+    static int magicalDamage = 10; // Base magic dmg
     static string playerName = ""; // Player name 
 
     static VoiceToTextProtocol voice = new VoiceToTextProtocol(); //Voice text protocol class
@@ -52,8 +52,11 @@ public class Program
 
     private static void Greetings()
     {
+        Console.ForegroundColor = ConsoleColor.DarkMagenta;
         Console.WriteLine("Hello wizard, what is your name?"); //Ask the players name
+        Console.ForegroundColor = ConsoleColor.DarkCyan;
         playerName = Console.ReadLine();
+        Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine($"Welcome, {playerName}!");
         Console.WriteLine("[Press enter to continue]");
         Console.ReadKey();
@@ -62,88 +65,133 @@ public class Program
     private static void Spells()
     {
         Console.WriteLine($"{playerName} this are your current spells, use them to win against your opponent: GARY THE WIZARD");
-        for (int i = 0; i < SpellNature.Length; i++) 
+        for (int i = 0; i < spellNature.Length; i++) 
         {
-            Console.WriteLine($"Spell  adjective: {SpellAdjective[i]}");
-            Console.WriteLine($"Spell nature: {SpellNature[i]}");
-            Console.WriteLine($"{SpellAdjective[i]} + {SpellNature[i]} = {SpellCasted[i]}");
+            switch (i)
+            {
+                case 0:
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    break;
+                case 1:
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    break;
+                case 2:
+                    Console.BackgroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    break;
+
+                default:
+                    break;
+            };
+
+            Console.WriteLine($"Spell  adjective: {spellAdjective[i]}");
+            Console.WriteLine($"Spell nature: {spellNature[i]}");
+            Console.WriteLine($"{spellAdjective[i]} + {spellNature[i]} = {spellCasted[i]}");
+
+            if (i == 2) {Console.BackgroundColor = ConsoleColor.Black;}
         }
+
         Console.WriteLine("[Press enter to continue]");
         Console.ReadKey();
         Console.Clear();
     }
     private static void DisplayInstructions()
     {
+        Console.ForegroundColor = ConsoleColor.DarkMagenta;
         //Console.WriteLine("Light beats Darkness // Darkness Beats Neutral // Neutral Beats Light");
         Console.WriteLine($"After combining successfully a spell adjective and a spell nature you will successfully cast the spell");
+        Console.WriteLine("For example, if you wish to cast Cone of Darkness");
+        Console.WriteLine("1. Speak into the mic the word 'cone' when the prompt shows to speak a spells Adjective");
+        Console.WriteLine("2. Speak into the mic the word 'darkness' when the prompt shows to speak a spells Nature");
+        Console.WriteLine("Keep in mind that every round of spell casting both you and gary will suffer damage");
         Console.WriteLine("[Press enter to start your epic wizard fight]");
         Console.ReadKey();
+        Console.ForegroundColor = ConsoleColor.White;
         Console.Clear();
     }
     private static void StartCombatSequence()
     {
-        string PlayerSpell = "";
-        string GarySpell = "";
-        bool TheyAreAlive = true;
+        string playerSpell = "";
+        string garySpell = "";
+        bool theyAreAlive = true;
 
         Console.WriteLine("START EPIC COMBAT SEQUENCE");
 
-        while (TheyAreAlive)
+        while (theyAreAlive)
         {
             // Player attacks by casting an incantation
-            PlayerSpell = PlayerCastsASpell();
+            playerSpell = PlayerCastsASpell();
 
             //Gary gets allocated a random spell to cast
-            GarySpell = GaryCastsASpell();
+            garySpell = GaryCastsASpell();
 
             // Determine wizard winner
-            DetermineTheMostPowerfullWizard(PlayerSpell, GarySpell);
+            DetermineTheMostPowerfullWizard(playerSpell, garySpell);
 
-            if (GarysHealth <= 0) { TheyAreAlive = false;}
-            if (PlayerHealth <= 0) { TheyAreAlive = false; }
+            if (garysHealth <= 0) { theyAreAlive = false;}
+            if (playerHealth <= 0) { theyAreAlive = false; }
         }
 
-        if(PlayerHealth <= 0 && GarysHealth >= 0) 
+        if(playerHealth <= 0 && garysHealth >= 0) 
         {
+            Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine("GARY THE WIZARD has won the battle of wizards proving himself superior!");
+            Console.ForegroundColor = ConsoleColor.White;
         }
-        if (GarysHealth <= 0 && PlayerHealth >= 0)
+        if (garysHealth <= 0 && playerHealth >= 0)
         {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine($"{playerName} is victorious on the epic battle of the wizards");
+            Console.ForegroundColor = ConsoleColor.White;
         }
-        if (PlayerHealth < 0 && GarysHealth < 0)
+        if (playerHealth < 0 && garysHealth < 0)
         {
+            Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("Both wizards fall to the ground as they slowly die, the council declares a draw between the two legendary wizards!");
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
     }
     private static string PlayerCastsASpell()
     {
+        Console.ForegroundColor = ConsoleColor.DarkMagenta;
         Console.WriteLine($"{playerName} prepares to cast an all powerful incantation to face against GARY THE WIZARD");
+        Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine("Cast your Spell Adjective");
+        Console.ForegroundColor = ConsoleColor.White;
         string PlayerAdjective = voice.ReadPlayersInput();
+        Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine("Cast your Spell Nature");
+        Console.ForegroundColor = ConsoleColor.White;
         string PlayerNature = voice.ReadPlayersInput();
         //Console.WriteLine(PlayerAdjective + PlayerNature); DEBUG
 
         if (PlayerNature.ToLower() + PlayerAdjective.ToLower()  == "neutralspark") //DONE DONE
         {
-            Console.WriteLine("The player casted " + SpellCasted[0]);
-            return SpellCasted[0];
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine("The player casted " + spellCasted[0]);
+            return spellCasted[0];
         }
         if (PlayerNature.ToLower() + PlayerAdjective.ToLower()  == "lightray") // DONE DONE
         {
-            Console.WriteLine("The player casted " + SpellCasted[1]);
-            return SpellCasted[1];
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("The player casted " + spellCasted[1]);
+            return spellCasted[1];
         }
         if (PlayerNature.ToLower() + PlayerAdjective.ToLower() == "darknesscone") // DONE DONE
         {
-            Console.WriteLine("The player casted " + SpellCasted[2]);
-            return SpellCasted[2];
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.WriteLine("The player casted " + spellCasted[2]);
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
+            return spellCasted[2];
         }
         else // Incantation gets checked to see if its a valid spell?
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("GARY THE WIZARD CHUCKLES as you fumble your spells");
+            Console.ForegroundColor = ConsoleColor.White;
             return "";
         }
 
@@ -151,112 +199,163 @@ public class Program
     private static string GaryCastsASpell()
     {
         int randomSpellChooser = random.Next(3);
-        return SpellCasted[randomSpellChooser];
+        return spellCasted[randomSpellChooser];
         //Console.WriteLine("The random chose spell for gary is " + SpellCasted[randomSpellChooser]); DEBUG
     }
-    private static void DetermineTheMostPowerfullWizard(string PlayersInputSpell , string GaryInputSpell)
+    private static void DetermineTheMostPowerfullWizard(string playersInputSpell , string garyInputSpell)
     {
         
         //FIND A MORE EFICIENT WAY TO MAKE THIS HAPPEN INSTEAD OF REPEATING SO MUCH CODE ASK FOR SOME FEEDBACK ONCE ASSIGNMENT IS DONE
         // OR ASK TA FOR HELP
         
         //SPARK
-        if (PlayersInputSpell == SpellCasted[0] && GaryInputSpell == SpellCasted[1]) // Player neutrality and gary light so player deals x2 damage
+        if (playersInputSpell == spellCasted[0] && garyInputSpell == spellCasted[1]) // Player neutrality and gary light so player deals x2 damage
         {
-            PlayerHealth -= MagicalDamage / 2;
-            GarysHealth -= MagicalDamage * 2;
-            Console.WriteLine($"{playerName} {PlayersInputSpell} beats GARY THE WIZARDS {GaryInputSpell}");
-            Console.WriteLine("Player Health: " + PlayerHealth);
-            Console.WriteLine("GARY THE WIZARD Health: " + GarysHealth);
+            playerHealth -= magicalDamage / 2;
+            garysHealth -= magicalDamage * 2;
+            Console.WriteLine($"{playerName} {playersInputSpell} beats GARY THE WIZARDS {garyInputSpell}");
+            Console.WriteLine("Player Health: " + playerHealth);
+            Console.WriteLine("GARY THE WIZARD Health: " + garysHealth);
         }
-        if (PlayersInputSpell == SpellCasted[0] && GaryInputSpell == SpellCasted[2]) // Gary darkness and player neutrality so gary deals x2 damage
+        if (playersInputSpell == spellCasted[0] && garyInputSpell == spellCasted[2]) // Gary darkness and player neutrality so gary deals x2 damage
         {
-            GarysHealth -= MagicalDamage / 2;
-            PlayerHealth -= MagicalDamage * 2;
-            Console.WriteLine($"GARY THE WIZARDS {GaryInputSpell} has too much power for the flimsy {PlayersInputSpell} that {playerName} just casted!");
-            Console.WriteLine("Player Health: " + PlayerHealth);
-            Console.WriteLine("GARY THE WIZARD Health: " + GarysHealth);
+            garysHealth -= magicalDamage / 2;
+            playerHealth -= magicalDamage * 2;
+            Console.WriteLine($"GARY THE WIZARDS {garyInputSpell} has too much power for the flimsy {playersInputSpell} that {playerName} just casted!");
+            Console.WriteLine("Player Health: " + playerHealth);
+            Console.WriteLine("GARY THE WIZARD Health: " + garysHealth);
         }
-        if (PlayersInputSpell == SpellCasted[0] && GaryInputSpell == SpellCasted[0]) // Both casted the same
+        if (playersInputSpell == spellCasted[0] && garyInputSpell == spellCasted[0]) // Both casted the same
         {
-            GarysHealth -= MagicalDamage;
-            PlayerHealth -= MagicalDamage;
-            Console.WriteLine($"It seems that GARY THE WIZARD and {playerName} are matched in skill and power");
-            Console.WriteLine("Player Health: " + PlayerHealth);
-            Console.WriteLine("GARY THE WIZARD Health: " + GarysHealth);
+            garysHealth -= magicalDamage;
+            playerHealth -= magicalDamage;
+            Console.WriteLine($"It seems that GARY THE WIZARD and {playerName} are matched in skill and power, both casted {playersInputSpell}");
+            Console.WriteLine("Player Health: " + playerHealth);
+            Console.WriteLine("GARY THE WIZARD Health: " + garysHealth);
 
         }
         //LIGHT
-        if (PlayersInputSpell == SpellCasted[1] && GaryInputSpell == SpellCasted[1]) // Both casted the same 
+        if (playersInputSpell == spellCasted[1] && garyInputSpell == spellCasted[1]) // Both casted the same 
         {
-            GarysHealth -= MagicalDamage;
-            PlayerHealth -= MagicalDamage;
-            Console.WriteLine($"It seems that GARY THE WIZARD and {playerName} are matched in skill and power");
-            Console.WriteLine("Player Health: " + PlayerHealth);
-            Console.WriteLine("GARY THE WIZARD Health: " + GarysHealth);
+            garysHealth -= magicalDamage;
+            playerHealth -= magicalDamage;
+            Console.WriteLine($"It seems that GARY THE WIZARD and {playerName} are matched in skill and power, both casted {playersInputSpell}");
+            Console.WriteLine("Player Health: " + playerHealth);
+            Console.WriteLine("GARY THE WIZARD Health: " + garysHealth);
 
         }
-        if (PlayersInputSpell == SpellCasted[1] && GaryInputSpell == SpellCasted[2]) // Player cast light Gary cast Dark Player deals 2x
+        if (playersInputSpell == spellCasted[1] && garyInputSpell == spellCasted[2]) // Player cast light Gary cast Dark Player deals 2x
         {
-            PlayerHealth -= MagicalDamage / 2;
-            GarysHealth -= MagicalDamage * 2;
-            Console.WriteLine($"{playerName} {PlayersInputSpell} beats GARY THE WIZARDS {GaryInputSpell}!");
-            Console.WriteLine("Player Health: " + PlayerHealth);
-            Console.WriteLine("GARY THE WIZARD Health: " + GarysHealth);
+            playerHealth -= magicalDamage / 2;
+            garysHealth -= magicalDamage * 2;
+            Console.WriteLine($"{playerName} {playersInputSpell} beats GARY THE WIZARDS {garyInputSpell}!");
+            Console.WriteLine("Player Health: " + playerHealth);
+            Console.WriteLine("GARY THE WIZARD Health: " + garysHealth);
         }
-        if (PlayersInputSpell == SpellCasted[1] && GaryInputSpell == SpellCasted[0])  // Gary cast neutral player cast light Gary deals 2x
+        if (playersInputSpell == spellCasted[1] && garyInputSpell == spellCasted[0])  // Gary cast neutral player cast light Gary deals 2x
         {
-            GarysHealth -= MagicalDamage / 2;
-            PlayerHealth -= MagicalDamage * 2;
-            Console.WriteLine($"GARY THE WIZARDS {GaryInputSpell} has too much power for the flimsy {PlayersInputSpell} that {playerName} just casted!");
-            Console.WriteLine("Player Health: " + PlayerHealth);
-            Console.WriteLine("GARY THE WIZARD Health: " + GarysHealth);
+            garysHealth -= magicalDamage / 2;
+            playerHealth -= magicalDamage * 2;
+            Console.WriteLine($"GARY THE WIZARDS {garyInputSpell} has too much power for the flimsy {playersInputSpell} that {playerName} just casted!");
+            Console.WriteLine("Player Health: " + playerHealth);
+            Console.WriteLine("GARY THE WIZARD Health: " + garysHealth);
 
         }
         //DARK
-        if (PlayersInputSpell == SpellCasted[2] && GaryInputSpell == SpellCasted[1]) // Player cast dark Gary cast light Gary deals 2x 
+        if (playersInputSpell == spellCasted[2] && garyInputSpell == spellCasted[1]) // Player cast dark Gary cast light Gary deals 2x 
         {
-            GarysHealth -= MagicalDamage / 2;
-            PlayerHealth -= MagicalDamage * 2;
-            Console.WriteLine($"GARY THE WIZARDS {GaryInputSpell} has too much power for the flimsy  {PlayersInputSpell}  that {playerName} just casted!");
-            Console.WriteLine("Player Health: " + PlayerHealth);
-            Console.WriteLine("GARY THE WIZARD Health: " + GarysHealth);
+            garysHealth -= magicalDamage / 2;
+            playerHealth -= magicalDamage * 2;
+            Console.WriteLine($"GARY THE WIZARDS {garyInputSpell} has too much power for the flimsy  {playersInputSpell}  that {playerName} just casted!");
+            Console.WriteLine("Player Health: " + playerHealth);
+            Console.WriteLine("GARY THE WIZARD Health: " + garysHealth);
 
         }
-        if (PlayersInputSpell == SpellCasted[2] && GaryInputSpell == SpellCasted[2]) // Both cast same
+        if (playersInputSpell == spellCasted[2] && garyInputSpell == spellCasted[2]) // Both cast same
         {
-            GarysHealth -= MagicalDamage;
-            PlayerHealth -= MagicalDamage;
-            Console.WriteLine($"It seems that GARY THE WIZARD and {playerName} are matched in skill and power");
-            Console.WriteLine("Player Health: " + PlayerHealth);
-            Console.WriteLine("GARY THE WIZARD Health: " + GarysHealth);
+            garysHealth -= magicalDamage;
+            playerHealth -= magicalDamage;
+            Console.WriteLine($"It seems that GARY THE WIZARD and {playerName} are matched in skill and power, both casted  {playersInputSpell}");
+            Console.WriteLine("Player Health: " + playerHealth);
+            Console.WriteLine("GARY THE WIZARD Health: " + garysHealth);
 
         }
-        if (PlayersInputSpell == SpellCasted[2] && GaryInputSpell == SpellCasted[0])  // Player cast dark Gary cast neutral Player deals 2x
+        if (playersInputSpell == spellCasted[2] && garyInputSpell == spellCasted[0])  // Player cast dark Gary cast neutral Player deals 2x
         {
-            PlayerHealth -= MagicalDamage / 2;
-            GarysHealth -= MagicalDamage * 2;
-            Console.WriteLine($"{playerName} spell beats GARY THE WIZARDS {GaryInputSpell}!");
-            Console.WriteLine("Player Health: " + PlayerHealth);
-            Console.WriteLine("GARY THE WIZARD Health: " + GarysHealth);
+            playerHealth -= magicalDamage / 2;
+            garysHealth -= magicalDamage * 2;
+            Console.WriteLine($"{playerName} spell beats GARY THE WIZARDS {garyInputSpell}!");
+            Console.WriteLine("Player Health: " + playerHealth);
+            Console.WriteLine("GARY THE WIZARD Health: " + garysHealth);
         }
+        
+        Console.ForegroundColor = ConsoleColor.DarkMagenta;
         Console.WriteLine("Wizards prepare your next spells GO!");
         Console.WriteLine("[Press enter to Start the next round]");
+        Console.ForegroundColor = ConsoleColor.White;
         Console.ReadKey();
         Console.Clear();
 
-       
+    }
 
+    private static void GoodBye()
+    {
+        Console.WriteLine(@"
+XXXXX                 XXXXXXXXXXX    X                                     
+X    XXXXX                 X         X                   XXXXXXXXXXXX      
+X         XX               X         X                XXX           XXX    
+X          X               X         X              XX                XX   
+X         XX               X         X            XX                    X  
+X         X                X         X            X                     XX 
+X       XXX                X         X           XX                      XX
+X      XX                  X         X           X                        X
+X   XXX                    X         X           X                       X 
+XXXX                       X         X           X                       X 
+XXXX                       X         X           X                       X 
+X  XXXXXXXXXXX             X         X           X                      XX 
+X             XXXX         X         X           X                      X  
+X                XX        X         X           X                     X   
+X                  X       X         X            XX                  X    
+X                 XX       X         X             XX                XX    
+X                 X        X         X              XXX              X     
+X                X         X         X                 XXXX       XXX      
+X              XX          X         X                     XXXXXXXX        
+X             XX           X         X                                     
+X          XXX             X         X                                     
+X   XXXXXXXX               X         X                                     
+XXXXX                 XXXXXXXXXXX    XXXXXXXXXXXXXXXX                              
+
+        ");
+        Console.WriteLine("Thanks for playing this code is made and owned by BILO ");
 
     }
 
-
-
-
-   
-
-
-
-
-
 }
+
+
+/*
+XXXXX                 XXXXXXXXXXX    X                                     
+X    XXXXX                 X         X                   XXXXXXXXXXXX      
+X         XX               X         X                XXX           XXX    
+X          X               X         X              XX                XX   
+X         XX               X         X            XX                    X  
+X         X                X         X            X                     XX 
+X       XXX                X         X           XX                      XX
+X      XX                  X         X           X                        X
+X   XXX                    X         X           X                       X 
+XXXX                       X         X           X                       X 
+XXXX                       X         X           X                       X 
+X  XXXXXXXXXXX             X         X           X                      XX 
+X             XXXX         X         X           X                      X  
+X                XX        X         X           X                     X   
+X                  X       X         X            XX                  X    
+X                 XX       X         X             XX                XX    
+X                 X        X         X              XXX              X     
+X                X         X         X                 XXXX       XXX      
+X              XX          X         X                     XXXXXXXX        
+X             XX           X         X                                     
+X          XXX             X         X                                     
+X   XXXXXXXX               X         X                                     
+XXXXX                 XXXXXXXXXXX    XXXXXXXXXXXXXXXX                                
+
+  */
